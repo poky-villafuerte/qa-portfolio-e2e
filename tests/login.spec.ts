@@ -6,7 +6,7 @@ test('Login Successful', async({page})=>{
     await loginPage.goto()
     await loginPage.login(
       process.env.SAUCE_USERNAME!,
-      process.env.SAUCE_PASSWORD!,
+      process.env.SAUCE_PASSWORD!
     );
     await loginPage.verifyLoginSuccess()
 })
