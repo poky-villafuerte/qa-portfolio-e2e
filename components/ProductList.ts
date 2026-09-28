@@ -10,7 +10,9 @@ export class ProductList {
     }
 
     getItem(productName:string):Locator{
-        const item = this.items.filter({ hasText: productName })
+        const item = this.items.filter({
+          has: this.page.getByText(productName, { exact: true }),
+        })
         return item
     }
 }
