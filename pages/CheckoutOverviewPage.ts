@@ -12,7 +12,7 @@ export class CheckoutOverviewPage {
     this.finishButton = page.getByTestId("finish")
   }
 
-  async verifyItemIsInCart(productName: string) {
+  async verifyProductIsInOverview(productName: string) {
     const item = this.productList.getItem(productName)
 
     await expect(item).toBeVisible()

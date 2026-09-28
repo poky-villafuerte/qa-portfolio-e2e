@@ -31,9 +31,15 @@ test('Checkout Flow', async ({page})=>{
     await inventoryPage.clickCartIcon()
     await cartPage.verifyItemIsInCart(productName)
     await cartPage.clickCheckoutButton()
+    await checkoutInformationPage.verifyUserIsInInformationSection()
     await checkoutInformationPage.fillAllFields(firstName, lastName, zipCode)
+    await checkoutInformationPage.verifyFieldsAreFilled(
+      firstName,
+      lastName,
+      zipCode,
+    )
     await checkoutInformationPage.clickContinueButton()
-    await checkoutOverviewPage.verifyItemIsInCart(productName)
+    await checkoutOverviewPage.verifyProductIsInOverview(productName)
     await checkoutOverviewPage.clickFinishButton()
     await checkoutCompletePage.verifyCheckoutWasCompleted()
 })
