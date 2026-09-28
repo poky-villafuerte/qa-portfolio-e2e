@@ -1,9 +1,14 @@
 import {LoginPage} from '../pages/LoginPage'
 import {test} from '@playwright/test'
 
-test('Login Successful', async({page})=>{
-    const loginPage = new LoginPage(page)
-    await loginPage.goto()
+let loginPage: LoginPage
+
+test.beforeEach(async({page})=>{
+  loginPage = new LoginPage(page)
+  await loginPage.goto()
+})
+
+test('Login Successful', async()=>{
     await loginPage.login(
       process.env.SAUCE_USERNAME!,
       process.env.SAUCE_PASSWORD!
@@ -11,18 +16,14 @@ test('Login Successful', async({page})=>{
     await loginPage.verifyLoginSuccess()
 })
 
-test('Login Failed due to Invalid Username', async({page})=>{
-    const loginPage = new LoginPage(page)
-    await loginPage.goto()
+test('Login Failed due to Invalid Username', async()=>{
     await loginPage.login(
       process.env.SAUCE_INVALID_USERNAME!,
       process.env.SAUCE_PASSWORD!);
     await loginPage.verifyLoginFailByCredentials();
 })
 
-test("Login Failed due to Invalid Password", async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.goto();
+test("Login Failed due to Invalid Password", async () => {
   await loginPage.login(
     process.env.SAUCE_USERNAME!,
     process.env.SAUCE_INVALID_PASSWORD!,
@@ -30,9 +31,7 @@ test("Login Failed due to Invalid Password", async ({ page }) => {
   await loginPage.verifyLoginFailByCredentials();
 })
 
-test("Login Failed due to Invalid Credentials", async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.goto();
+test("Login Failed due to Invalid Credentials", async () => {
   await loginPage.login(
     process.env.SAUCE_INVALID_USERNAME!,
     process.env.SAUCE_INVALID_PASSWORD!,
@@ -40,9 +39,7 @@ test("Login Failed due to Invalid Credentials", async ({ page }) => {
   await loginPage.verifyLoginFailByCredentials();
 })
 
-test("Login Failed due to Empty Fields", async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.goto();
+test("Login Failed due to Empty Fields", async () => {
   await loginPage.clickLoginButton();
   await loginPage.verifyLoginFailByEmptyFields();
 });
