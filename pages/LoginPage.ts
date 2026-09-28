@@ -18,7 +18,7 @@ export class LoginPage {
   }
 
   async goto() {
-    await this.page.goto("https://www.saucedemo.com/");
+    await this.page.goto('/');
   }
 
   async login(username: string, password: string) {
@@ -32,7 +32,7 @@ export class LoginPage {
 
   async verifyLoginSuccess() {
     await expect(this.page).toHaveURL(
-      "https://www.saucedemo.com/inventory.html",
+      "/inventory.html",
     );
     await expect(this.appLogo).toBeVisible();
   }
