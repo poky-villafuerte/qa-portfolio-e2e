@@ -8,5 +8,11 @@
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "include": ["tests", "pages", "playwright.config.ts"]
+  "include": [
+    "tests",
+    "pages",
+    "playwright.config.ts",
+    "fixtures",
+    "components"
+  ]
 }
