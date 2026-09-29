@@ -1,5 +1,5 @@
-import { Page, Locator, expect } from "@playwright/test"
-import { ProductList } from "../components/ProductList"
+import { Page, Locator, expect } from '@playwright/test'
+import { ProductList } from '../components/ProductList'
 
 export class CartPage {
   readonly page: Page
@@ -9,7 +9,7 @@ export class CartPage {
   constructor(page: Page) {
     this.page = page
     this.productList = new ProductList(page)
-    this.checkoutButton = page.getByTestId("checkout")
+    this.checkoutButton = page.getByTestId('checkout')
   }
 
   async verifyItemIsInCart(productName: string) {
@@ -17,8 +17,8 @@ export class CartPage {
 
     await expect(item).toBeVisible()
   }
-  
-  async clickCheckoutButton(){
+
+  async clickCheckoutButton() {
     await this.checkoutButton.click()
   }
 }

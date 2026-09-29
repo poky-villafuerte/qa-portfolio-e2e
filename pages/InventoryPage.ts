@@ -1,4 +1,4 @@
-import {Page, Locator, expect} from '@playwright/test'
+import { Page, Locator, expect } from '@playwright/test'
 import { ProductList } from '../components/ProductList'
 
 export class InventoryPage {
@@ -9,12 +9,12 @@ export class InventoryPage {
   constructor(page: Page) {
     this.page = page
     this.productList = new ProductList(page)
-    this.cartIcon = page.getByTestId("shopping-cart-link")
+    this.cartIcon = page.getByTestId('shopping-cart-link')
   }
 
   async addProductToCart(productName: string) {
     const item = this.productList.getItem(productName)
-    const addButton = item.getByRole("button", { name: "Add to cart" })
+    const addButton = item.getByRole('button', { name: 'Add to cart' })
     await addButton.click()
   }
 
@@ -24,7 +24,7 @@ export class InventoryPage {
 
   async verifyProductAddedToCart(productName: string) {
     const item = this.productList.getItem(productName)
-    const removeButton = item.getByRole("button", { name: "Remove" })
+    const removeButton = item.getByRole('button', { name: 'Remove' })
     await expect(removeButton).toBeVisible()
   }
 }

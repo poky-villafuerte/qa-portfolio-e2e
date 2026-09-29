@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from "@playwright/test"
+import { Page, Locator, expect } from '@playwright/test'
 
 export class CheckoutInformationPage {
   readonly page: Page
@@ -9,14 +9,14 @@ export class CheckoutInformationPage {
 
   constructor(page: Page) {
     this.page = page
-    this.firstNameField = page.getByTestId("firstName")
-    this.lastNameField = page.getByTestId("lastName")
-    this.zipCodeField = page.getByTestId("postalCode")
-    this.continueButton = page.getByTestId("continue")
+    this.firstNameField = page.getByTestId('firstName')
+    this.lastNameField = page.getByTestId('lastName')
+    this.zipCodeField = page.getByTestId('postalCode')
+    this.continueButton = page.getByTestId('continue')
   }
 
   async verifyUserIsInInformationSection() {
-    await expect(this.page).toHaveURL("/checkout-step-one.html")
+    await expect(this.page).toHaveURL('/checkout-step-one.html')
     await expect(this.firstNameField).toBeVisible()
     await expect(this.lastNameField).toBeVisible()
     await expect(this.zipCodeField).toBeVisible()

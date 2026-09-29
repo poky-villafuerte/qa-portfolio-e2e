@@ -1,5 +1,5 @@
-import { Page, Locator, expect } from "@playwright/test"
-import { ProductList } from "../components/ProductList"
+import { Page, Locator, expect } from '@playwright/test'
+import { ProductList } from '../components/ProductList'
 
 export class CheckoutOverviewPage {
   readonly page: Page
@@ -9,7 +9,7 @@ export class CheckoutOverviewPage {
   constructor(page: Page) {
     this.page = page
     this.productList = new ProductList(page)
-    this.finishButton = page.getByTestId("finish")
+    this.finishButton = page.getByTestId('finish')
   }
 
   async verifyProductIsInOverview(productName: string) {

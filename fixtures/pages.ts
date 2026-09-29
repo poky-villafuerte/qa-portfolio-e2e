@@ -1,10 +1,10 @@
-import { test as base } from "@playwright/test"
-import { CartPage } from "../pages/CartPage"
-import { CheckoutCompletePage } from "../pages/CheckoutCompletePage"
-import { CheckoutInformationPage } from "../pages/CheckoutInformationPage"
-import { CheckoutOverviewPage } from "../pages/CheckoutOverviewPage"
-import { InventoryPage } from "../pages/InventoryPage"
-import { LoginPage } from "../pages/LoginPage"
+import { test as base } from '@playwright/test'
+import { CartPage } from '../pages/CartPage'
+import { CheckoutCompletePage } from '../pages/CheckoutCompletePage'
+import { CheckoutInformationPage } from '../pages/CheckoutInformationPage'
+import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage'
+import { InventoryPage } from '../pages/InventoryPage'
+import { LoginPage } from '../pages/LoginPage'
 
 type Pages = {
   loginPage: LoginPage
@@ -36,4 +36,4 @@ export const test = base.extend<Pages>({
   },
 })
 
-export { expect } from "@playwright/test"
+export { expect } from '@playwright/test'

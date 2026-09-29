@@ -1,6 +1,6 @@
-import { test } from "../fixtures/pages"
+import { test } from '../fixtures/pages'
 
-test("Checkout Flow", async ({
+test('Checkout Flow', async ({
   loginPage,
   inventoryPage,
   cartPage,
@@ -8,10 +8,10 @@ test("Checkout Flow", async ({
   checkoutOverviewPage,
   checkoutCompletePage,
 }) => {
-  const productName = "Sauce Labs Backpack"
-  const firstName = "Tracy"
-  const lastName = "Villafuerte"
-  const zipCode = "11801B"
+  const productName = 'Sauce Labs Backpack'
+  const firstName = 'Tracy'
+  const lastName = 'Villafuerte'
+  const zipCode = '11801B'
 
   await loginPage.goto()
   await loginPage.login(

@@ -1,18 +1,18 @@
-import { Page, Locator } from "@playwright/test"
+import { Page, Locator } from '@playwright/test'
 
 export class ProductList {
-    readonly page: Page
-    readonly items: Locator
+  readonly page: Page
+  readonly items: Locator
 
-    constructor(page:Page){
-        this.page = page
-        this.items = page.getByTestId("inventory-item")
-    }
+  constructor(page: Page) {
+    this.page = page
+    this.items = page.getByTestId('inventory-item')
+  }
 
-    getItem(productName:string):Locator{
-        const item = this.items.filter({
-          has: this.page.getByText(productName, { exact: true }),
-        })
-        return item
-    }
+  getItem(productName: string): Locator {
+    const item = this.items.filter({
+      has: this.page.getByText(productName, { exact: true }),
+    })
+    return item
+  }
 }
