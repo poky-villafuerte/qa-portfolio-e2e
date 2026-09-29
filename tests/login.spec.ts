@@ -1,45 +1,42 @@
-import {LoginPage} from '../pages/LoginPage'
-import {test} from '@playwright/test'
+import { test } from "../fixtures/pages"
 
-let loginPage: LoginPage
-
-test.beforeEach(async({page})=>{
-  loginPage = new LoginPage(page)
+test.beforeEach(async ({ loginPage }) => {
   await loginPage.goto()
 })
 
-test('Login Successful', async()=>{
-    await loginPage.login(
-      process.env.SAUCE_USERNAME!,
-      process.env.SAUCE_PASSWORD!
-    );
-    await loginPage.verifyLoginSuccess()
+test("Login Successful", async ({ loginPage }) => {
+  await loginPage.login(
+    process.env.SAUCE_USERNAME!,
+    process.env.SAUCE_PASSWORD!,
+  )
+  await loginPage.verifyLoginSuccess()
 })
 
-test('Login Failed due to Invalid Username', async()=>{
-    await loginPage.login(
-      process.env.SAUCE_INVALID_USERNAME!,
-      process.env.SAUCE_PASSWORD!);
-    await loginPage.verifyLoginFailByCredentials();
+test("Login Failed due to Invalid Username", async ({ loginPage }) => {
+  await loginPage.login(
+    process.env.SAUCE_INVALID_USERNAME!,
+    process.env.SAUCE_PASSWORD!,
+  )
+  await loginPage.verifyLoginFailByCredentials()
 })
 
-test("Login Failed due to Invalid Password", async () => {
+test("Login Failed due to Invalid Password", async ({ loginPage }) => {
   await loginPage.login(
     process.env.SAUCE_USERNAME!,
     process.env.SAUCE_INVALID_PASSWORD!,
-  );
-  await loginPage.verifyLoginFailByCredentials();
+  )
+  await loginPage.verifyLoginFailByCredentials()
 })
 
-test("Login Failed due to Invalid Credentials", async () => {
+test("Login Failed due to Invalid Credentials", async ({ loginPage }) => {
   await loginPage.login(
     process.env.SAUCE_INVALID_USERNAME!,
     process.env.SAUCE_INVALID_PASSWORD!,
-  );
-  await loginPage.verifyLoginFailByCredentials();
+  )
+  await loginPage.verifyLoginFailByCredentials()
 })
 
-test("Login Failed due to Empty Fields", async () => {
-  await loginPage.clickLoginButton();
-  await loginPage.verifyLoginFailByEmptyFields();
-});
+test("Login Failed due to Empty Fields", async ({ loginPage }) => {
+  await loginPage.clickLoginButton()
+  await loginPage.verifyLoginFailByEmptyFields()
+})
