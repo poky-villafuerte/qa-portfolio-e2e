@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/LoginPage'
 
 type Pages = {
   loginPage: LoginPage
+  loggedInInventoryPage: InventoryPage
   inventoryPage: InventoryPage
   cartPage: CartPage
   checkoutInformationPage: CheckoutInformationPage
@@ -18,6 +19,15 @@ type Pages = {
 export const test = base.extend<Pages>({
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page))
+  },
+  loggedInInventoryPage: async ({ loginPage, inventoryPage }, use) => {
+    await loginPage.goto()
+    await loginPage.login(
+      process.env.SAUCE_USERNAME!,
+      process.env.SAUCE_PASSWORD!,
+    )
+    await loginPage.verifyLoginSuccess()
+    await use(inventoryPage)
   },
   inventoryPage: async ({ page }, use) => {
     await use(new InventoryPage(page))

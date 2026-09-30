@@ -1,8 +1,7 @@
 import { test } from '../fixtures/pages'
 
 test('Checkout Flow', async ({
-  loginPage,
-  inventoryPage,
+  loggedInInventoryPage,
   cartPage,
   checkoutInformationPage,
   checkoutOverviewPage,
@@ -13,15 +12,8 @@ test('Checkout Flow', async ({
   const lastName = 'Villafuerte'
   const zipCode = '11801B'
 
-  await loginPage.goto()
-  await loginPage.login(
-    process.env.SAUCE_USERNAME!,
-    process.env.SAUCE_PASSWORD!,
-  )
-
-  await loginPage.verifyLoginSuccess()
-  await inventoryPage.addProductToCart(productName)
-  await inventoryPage.clickCartIcon()
+  await loggedInInventoryPage.addProductToCart(productName)
+  await loggedInInventoryPage.clickCartIcon()
   await cartPage.verifyItemIsInCart(productName)
   await cartPage.clickCheckoutButton()
   await checkoutInformationPage.verifyUserIsInInformationSection()
