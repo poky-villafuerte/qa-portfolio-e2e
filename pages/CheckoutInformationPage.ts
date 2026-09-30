@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from '@playwright/test'
+import { Locator, Page, expect } from '@playwright/test'
 
 export class CheckoutInformationPage {
   readonly page: Page
@@ -6,6 +6,7 @@ export class CheckoutInformationPage {
   readonly lastNameField: Locator
   readonly zipCodeField: Locator
   readonly continueButton: Locator
+  readonly errorMessage: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -13,6 +14,7 @@ export class CheckoutInformationPage {
     this.lastNameField = page.getByTestId('lastName')
     this.zipCodeField = page.getByTestId('postalCode')
     this.continueButton = page.getByTestId('continue')
+    this.errorMessage = page.getByTestId('error')
   }
 
   async verifyUserIsInInformationSection() {
@@ -40,5 +42,10 @@ export class CheckoutInformationPage {
 
   async clickContinueButton() {
     await this.continueButton.click()
+  }
+
+  async verifyErrorMessage(message: string) {
+    await expect(this.errorMessage).toBeVisible()
+    await expect(this.errorMessage).toHaveText(message)
   }
 }

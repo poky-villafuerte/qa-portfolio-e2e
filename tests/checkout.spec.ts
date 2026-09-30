@@ -28,3 +28,55 @@ test('Checkout Flow', async ({
   await checkoutOverviewPage.clickFinishButton()
   await checkoutCompletePage.verifyCheckoutWasCompleted()
 })
+
+const emptyFieldScenarios = [
+  {
+    description: 'First Name is empty',
+    firstName: '',
+    lastName: 'Villafuerte',
+    zipCode: '11801B',
+    expectedError: 'Error: First Name is required',
+  },
+  {
+    description: 'Last Name is empty',
+    firstName: 'Tracy',
+    lastName: '',
+    zipCode: '11801B',
+    expectedError: 'Error: Last Name is required',
+  },
+  {
+    description: 'Postal Code is empty',
+    firstName: 'Tracy',
+    lastName: 'Villafuerte',
+    zipCode: '',
+    expectedError: 'Error: Postal Code is required',
+  },
+  {
+    description: 'all fields are empty',
+    firstName: '',
+    lastName: '',
+    zipCode: '',
+    expectedError: 'Error: First Name is required',
+  },
+]
+for (const scenario of emptyFieldScenarios) {
+  test(`Checkout fails when ${scenario.description}`, async ({
+    loggedInInventoryPage,
+    cartPage,
+    checkoutInformationPage,
+  }) => {
+    const productName = 'Sauce Labs Backpack'
+    await loggedInInventoryPage.addProductToCart(productName)
+    await loggedInInventoryPage.clickCartIcon()
+    await cartPage.clickCheckoutButton()
+    await checkoutInformationPage.verifyUserIsInInformationSection()
+
+    await checkoutInformationPage.fillAllFields(
+      scenario.firstName,
+      scenario.lastName,
+      scenario.zipCode,
+    )
+    await checkoutInformationPage.clickContinueButton()
+    await checkoutInformationPage.verifyErrorMessage(scenario.expectedError)
+  })
+}
