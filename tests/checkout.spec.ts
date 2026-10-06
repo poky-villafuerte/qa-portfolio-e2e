@@ -80,3 +80,30 @@ for (const scenario of emptyFieldScenarios) {
     await checkoutInformationPage.verifyErrorMessage(scenario.expectedError)
   })
 }
+
+test('Order totals are calculated correctly', async ({
+  loggedInInventoryPage,
+  cartPage,
+  checkoutInformationPage,
+  checkoutOverviewPage,
+}) => {
+  const products = [
+    'Sauce Labs Backpack',
+    'Sauce Labs Bike Light',
+    'Sauce Labs Onesie',
+  ]
+  const taxRate = 0.08
+
+  for (const product of products) {
+    await loggedInInventoryPage.addProductToCart(product)
+  }
+  await loggedInInventoryPage.clickCartIcon()
+  await cartPage.clickCheckoutButton()
+  await checkoutInformationPage.fillAllFields('Tracy', 'Villafuerte', '11801')
+  await checkoutInformationPage.clickContinueButton()
+
+  for (const product of products) {
+    await checkoutOverviewPage.verifyProductIsInOverview(product)
+  }
+  await checkoutOverviewPage.verifyTotalsAreCorrect(taxRate)
+})
