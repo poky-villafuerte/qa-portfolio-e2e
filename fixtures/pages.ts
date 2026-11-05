@@ -20,13 +20,8 @@ export const test = base.extend<Pages>({
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page))
   },
-  loggedInInventoryPage: async ({ loginPage, inventoryPage }, use) => {
-    await loginPage.goto()
-    await loginPage.login(
-      process.env.SAUCE_USERNAME!,
-      process.env.SAUCE_PASSWORD!,
-    )
-    await loginPage.verifyLoginSuccess()
+  loggedInInventoryPage: async ({ inventoryPage }, use) => {
+    await inventoryPage.goto()
     await use(inventoryPage)
   },
   inventoryPage: async ({ page }, use) => {

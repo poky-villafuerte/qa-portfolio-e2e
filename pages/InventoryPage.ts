@@ -20,6 +20,10 @@ export class InventoryPage {
     this.productPrices = page.getByTestId('inventory-item-price')
   }
 
+  async goto() {
+    await this.page.goto('/inventory.html')
+  }
+
   async addProductToCart(productName: string) {
     const item = this.productList.getItem(productName)
     const addButton = item.getByRole('button', { name: 'Add to cart' })
